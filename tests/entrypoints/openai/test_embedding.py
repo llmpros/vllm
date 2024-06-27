@@ -126,10 +126,17 @@ async def test_batch_base64_embedding(embedding_client: openai.AsyncOpenAI,
         "The best thing about vLLM is that it supports many different models"
     ]
 
+<<<<<<< HEAD
     responses_float = await embedding_client.embeddings.create(
         input=input_texts, model=model_name, encoding_format="float")
 
     responses_base64 = await embedding_client.embeddings.create(
+=======
+    responses_float = embedding_client.embeddings.create(
+        input=input_texts, model=model_name, encoding_format="float")
+
+    responses_base64 = embedding_client.embeddings.create(
+>>>>>>> dd0bbd9f ([openai embedding] add base64 encoding in EmbeddingResponseData)
         input=input_texts, model=model_name, encoding_format="base64")
 
     decoded_responses_base64_data = []
@@ -141,4 +148,8 @@ async def test_batch_base64_embedding(embedding_client: openai.AsyncOpenAI,
     assert responses_float.data[0].embedding == decoded_responses_base64_data[
         0]
     assert responses_float.data[1].embedding == decoded_responses_base64_data[
+<<<<<<< HEAD
         1]
+=======
+        1]
+>>>>>>> dd0bbd9f ([openai embedding] add base64 encoding in EmbeddingResponseData)

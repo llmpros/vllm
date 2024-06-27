@@ -33,7 +33,12 @@ def request_output_to_embedding_response(
         embedding = final_res.outputs.embedding
         if encoding_format == "base64":
             embedding = base64.b64encode(np.array(embedding))
+<<<<<<< HEAD
         embedding_data = EmbeddingResponseData(index=idx, embedding=embedding)
+=======
+        embedding_data = EmbeddingResponseData(index=idx,
+                                               embedding=[embedding])
+>>>>>>> dd0bbd9f ([openai embedding] add base64 encoding in EmbeddingResponseData)
         data.append(embedding_data)
 
         num_prompt_tokens += len(prompt_token_ids)
@@ -88,7 +93,6 @@ class OpenAIServingEmbedding(OpenAIServing):
         try:
             prompt_is_tokens, prompts = parse_prompt_format(request.input)
             pooling_params = request.to_pooling_params()
-
             for i, prompt in enumerate(prompts):
                 if prompt_is_tokens:
                     prompt_formats = self._validate_prompt_and_tokenize(
